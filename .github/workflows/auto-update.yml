@@ -1,60 +1,90 @@
+# 工作流名称：更新过滤器（Update Filters）
 name: Update Filters
+
+# 工作流触发条件配置
 on:
+  # 1. 代码推送触发
   push:
+    # 忽略指定路径的文件变更（这些文件推送不会触发工作流）
     paths-ignore:
-      - 'README.md'
-      - 'README_en.md'
-      - '.github/**'
-      - '.devcontainer/**'
-      - 'LICENSE'
+      - 'README.md'           # 忽略中文说明文档
+      - 'README_en.md'        # 忽略英文说明文档
+      - '.github/**'          # 忽略.github目录下所有文件
+      - '.devcontainer/**'    # 忽略开发容器配置目录
+      - 'LICENSE'             # 忽略许可证文件
+    # 仅在main分支有推送时触发
     branches: [ main ]
+  
+  # 2. 定时触发（Cron表达式）
   schedule:
-    - cron: 0 */8 * * *
+    # 每23小时执行一次（UTC时间），结合下方时区设置，实际为北京时间每8小时
+    - cron: 0 */23 * * *
+  
+  # 3. 手动触发（可在GitHub界面手动运行此工作流）
   workflow_dispatch:
 
+# 环境变量配置
 env:
+  # 设置时区为亚洲/上海（北京时间）
   TZ: Asia/Shanghai
 
+# 定义工作流任务
 jobs:
+  # 任务名称：Update_Filters（更新过滤器）
   Update_Filters:
+    # 运行环境：最新版Ubuntu系统
     runs-on: ubuntu-latest
+    
+    # 权限配置：允许工作流操作仓库内容和其他Action
     permissions:
-      contents: write
-      actions: write
+      contents: write       # 允许写入仓库内容（如提交代码）
+      actions: write        # 允许操作其他Action（如删除工作流运行记录）
       
+    # 任务步骤
     steps:
+      # 步骤1：检出当前仓库代码
       - uses: actions/checkout@v3
+        # 使用官方checkout动作，获取仓库代码到工作流运行环境中
 
+      # 步骤2：配置JDK 17环境
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
+          java-version: '17'       # 指定Java版本为17
+          distribution: 'temurin'  # 使用Eclipse Temurin发行版
+          cache: maven             # 缓存Maven依赖，加速构建
 
+      # 步骤3：运行Spring Boot应用程序
       - name: Run Jar
-        run:  mvn spring-boot:run
+        run:  mvn spring-boot:run  # 通过Maven命令启动Spring Boot应用
+        # 推测该应用会执行过滤器更新操作（如下载、处理过滤规则等）
 
+      # 步骤4：自动提交变更
       - name: Commit Changes
-        id: commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+        id: commit  # 定义步骤ID，用于后续步骤引用
+        uses: stefanzweifel/git-auto-commit-action@v4  # 使用自动提交Action
         with:
-          commit_message: 🚀 CI Updated
+          commit_message: 🚀 CI Updated  # 提交信息固定为"🚀 CI Updated"
 
+      # 步骤5：推送变更到GitHub仓库
       - name: GitHub Push
+        # 仅当步骤4检测到有文件变更时才执行此步骤
         if: steps.commit.outputs.changes_detected == 'true'
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@master  # 使用推送Action
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          branch: ${{github.ref}}
+          github_token: ${{secrets.GITHUB_TOKEN}}  # 使用GitHub提供的临时令牌
+          branch: ${{github.ref}}                  # 推送到当前分支（与触发分支一致）
 
+      # 步骤6：刷新CDN缓存
       - name: Mirror Refresh
+        # 等待10秒后，请求jsDelivr的缓存清理接口，确保最新规则生效
         run: sleep 10 && curl 'https://purge.jsdelivr.net/gh/${{github.repository}}/rule'
 
+      # 步骤7：清理工作流运行记录
       - name: Delete Workflow Runs
-        uses: Mattraks/delete-workflow-runs@v2
+        uses: Mattraks/delete-workflow-runs@v2  # 使用删除工作流运行记录的Action
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
-          repository: ${{ github.repository }}
-          retain_days: 1
-          keep_minimum_runs: 1
+          token: ${{secrets.GITHUB_TOKEN}}      # 认证令牌
+          repository: ${{ github.repository }}  # 当前仓库
+          retain_days: 1                        # 只保留最近1天的运行记录
+          keep_minimum_runs: 1                  # 至少保留1条运行记录
