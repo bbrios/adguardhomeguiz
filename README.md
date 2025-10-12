@@ -7,11 +7,11 @@
 
 | 名称            | 说明                                   |                                       Github                                        |                                                 ghproxy                                                 |
 |---------------|:-------------------------------------|:-----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
-| `all.txt`     | 完整规则，适用于 `AdGuard`、`AdBlock`等        |   [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/all.txt)   |   [Link](https://ghproxy.net/https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/all.txt)   |
-| `dns.txt`     | 适用于 `AdGuard Home` 等基于DNS的过滤工具       |   [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/dns.txt)   |   [Link](https://ghproxy.net/https://raw.githubusercontent.com/superbigsteam/adguardhomeguiz/main/rule/dns.txt)   |
-| `hosts.txt`   | 仅包含 `HOSTS` 规则                       |  [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/hosts.txt)  |  [Link](https://ghproxy.net/https://raw.githubusercontent.com/superbigsteam/adguardhomeguiz/main/rule/hosts.txt)  |
-| `modify.txt`  | `modify.txt` + `dns.txt` = `all.txt` | [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/modify.txt)  | [Link](https://ghproxy.net/https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/modify.txt)  |
-| `zhiyongguiz.txt` | 由本仓库维护的自用规则，目前很少，更新随缘| [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/zhiyongguiz.txt) | [Link](https://github.com/superbigsteam/adguardhomeguiz/blob/main/rule/zhiyongguiz.txt) |
+| `all.txt`     | 完整规则，适用于 `AdGuard`、`AdBlock`等        |   [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/all.txt)   |   [Link](https://ghproxy.net/https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/all.txt)   |
+| `dns.txt`     | 适用于 `AdGuard Home` 等基于DNS的过滤工具       |   [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/dns.txt)   |   [Link](https://ghproxy.net/https://raw.githubusercontent.com/fengyanfengyusuisuinian/adguardhomeguiz/main/rule/dns.txt)   |
+| `hosts.txt`   | 仅包含 `HOSTS` 规则                       |  [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/hosts.txt)  |  [Link](https://ghproxy.net/https://raw.githubusercontent.com/fengyanfengyusuisuinian/adguardhomeguiz/main/rule/hosts.txt)  |
+| `modify.txt`  | `modify.txt` + `dns.txt` = `all.txt` | [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/modify.txt)  | [Link](https://ghproxy.net/https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/modify.txt)  |
+| `zhiyongguiz.txt` | 由本仓库维护的自用规则，目前很少，更新随缘| [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/zhiyongguiz.txt) | [Link](https://github.com/fengyanfengyusuisuinian/adguardhomeguiz/blob/main/rule/zhiyongguiz.txt) |
 
 
 
